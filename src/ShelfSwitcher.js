@@ -12,17 +12,21 @@ class ShelfSwitcher extends React.Component {
         const {value} =event.target
         this.setState({value })
         this.props.onMove(this.state.book, value)
+        console.log(this.state.book.shelf)
     }
 
     render() {
         return(
             <div className="book-shelf-changer">
                 <select /* Creating the selector to switch the shelf the book will move to */
-                    value = {this.state.value}
+                    value = {this.state.book.shelf}
                     onChange = {this.handleChange}> 
                     <option value="move" disabled>
                         Move book to ..
                     </option>
+                    <option value="none">
+                        None
+                    </option> 
                     <option value="currentlyReading">
                         Currently Reading
                     </option>
@@ -32,9 +36,6 @@ class ShelfSwitcher extends React.Component {
                     <option value="read">
                         Read
                     </option>
-                    <option value="none">
-                        None
-                    </option> 
                 </select>
             </div>
         )
