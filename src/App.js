@@ -27,20 +27,19 @@ class App extends Component {
 	};
 
 	/* Function that moves the books from one shelf to another called on onMove attribute */
+	/* Indeed I forgot about the case where the bookshelf was 'none'. Also solved the issue with
+	the book appearing only after refresh*/
 	moveTheBook = (book, bookshelf)=>{
 		BooksAPI.update(book, bookshelf)
-		console.log(book)
-		const newLoadedBooks = this.state.loadedBooks.map(bk =>{
-			if(bk.id === book.id){
-				bk.shelf = bookshelf
-			}
-			return bk;
-		})
-		this.setState({
-			loadedBooks: newLoadedBooks,
-		})
+		const newLoadedBooks = this.state.loadedBooks
+		if (bookshelf !== 'none'){
+			book.shelf = bookshelf
+			this.setState({ loadedBooks: newLoadedBooks.filter(bk=>bk.id!==book.id).concat(book)})
+		}else{
+			book.shelf = bookshelf
+			this.setState({ loadedBooks: newLoadedBooks.filter(bk=>bk.id!==book.id)})
 		};
-
+}
 	/* Function that search through the books stored called on onSearch attribute */
 	searchThroughBooks = query =>{
 		if(query.length >0){
