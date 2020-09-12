@@ -6,7 +6,7 @@ MyReads: A Book Lending App
 
 ## Project Status
 
-Updated and complete
+Updated and completed
 
 
 ## Installation and Setup Instructions
